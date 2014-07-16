@@ -38,7 +38,7 @@
       <div id="nav-bar" class="">
          <div class="pull-left">
             <div id="header-container">
-               <h5>Potato Blogging</h5>
+               <h5><a href="/" style="color: #ffffff;">Potato Blogging</a></h5>
                <div class="dropdown">
                   <a class="header-dropdown dropdown-toggle accent-color" data-toggle="dropdown" href="#">
                      Main Menu
@@ -46,15 +46,18 @@
                   </a>
                   <ul class="dropdown-menu">
                   <li><a href="/">Home</a></li>
-                  <li><a href="/blog/newpost/">New Post</a></li>
+                  <li><a href="/blog/post/">New Post</a></li>
+                  <li><a href="/blog/offline/">Offline Posts</a></li>
+                  <li><a href="#" data-toggle="modal" data-target="#mySearch">Search Posts</a></li>
                   <li class="divider"></li>
                   <li><a href="https://github.com/edsonlb/potatoblogging" target="_blank">GitHub</a></li>
-                  <li><a href="edsonlopes.com/resume.jpg" target="_blank">Résumé</a></li>
+                  <li><a href="http://edsonlopes.com/resume.jpg" target="_blank">Résumé</a></li>
                   <li class="divider"></li>
                   <li><a href="/myadmin/logoff/">Logout</a></li>
                   
                </ul>
             </div>
+            
             </div>
          </div>
       </div>
@@ -68,10 +71,6 @@
 
                <a id="panorama-scroll-prev" href="#"></a>
                <a id="panorama-scroll-next" href="#"></a>
-               
-            <!--</div>-->
-         <!--</div>-->
-      <!--</div>-->
    
    </div>
 
@@ -86,8 +85,8 @@
    <script type="text/javascript" src="{{ STATIC_URL }}bootmetro/js/jquery.mousewheel.min.js"></script>
    <script type="text/javascript" src="{{ STATIC_URL }}bootmetro/js/jquery.touchSwipe.min.js"></script>
 
-   <script type="text/javascript" src="{{ STATIC_URL }}bootmetro/js/holder.js"></script>
-   <script type="text/javascript" src="{{ STATIC_URL }}bootmetro/js/demo.js"></script>
+   <!-- <script type="text/javascript" src="{{ STATIC_URL }}bootmetro/js/holder.js"></script>
+   <script type="text/javascript" src="{{ STATIC_URL }}bootmetro/js/demo.js"></script> -->
 
 
    <script type="text/javascript">
@@ -101,5 +100,24 @@
       $('#pivot').pivot();
 
    </script>
+
+<!-- Modal -->
+<div class="modal fade" id="mySearch" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="color: #000000;">
+      <div align="center">
+         <form class="form-search" action="/blog/search/" method="POST">{% csrf_token %}
+            <input type="text" class="input-medium search-query" name="search" >
+            <button type="submit" class="btn"><span class="icon-search"></span> Search</button>
+         </form>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn icon-arrow-left-2" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

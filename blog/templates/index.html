@@ -9,7 +9,7 @@
       <h2>New Posts</h2>
       <div class="tile-column-span-2">
       {% for post in new_posts %}                      
-            <a class="tile wide imagetext wideimage bg-color-green" href="/blog/">
+            <a class="tile wide imagetext wideimage bg-color-green" href="/blog/post/{{ post.title.split|join:'_' }}/">
                   <img src="{{ post.img }}" alt="{{ post.title }}"/>
                   <div class="textover-wrapper transparent">
                         <div class="text2">{{ post.title }}</div>
@@ -32,7 +32,7 @@
       <div class="tile-column-span-2">
       {% endif %}
    
-            <a class="tile square image" href="#">
+            <a class="tile square image" href="/blog/post/{{ post.title.split|join:'_' }}/">
                   <img src="{{ post.img }}" alt="{{ post.title }}"/>
                   <div class="textover-wrapper transparent">
                         <div class="text2">{{ post.title }}</div>
@@ -43,6 +43,6 @@
       </div>
       {% endif %} 
 
-      {% endfor %}    
+      {% endfor %}  
 </div>
 {% endblock main %}

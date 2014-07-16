@@ -19,7 +19,7 @@
       </div>
       {% endif %}
 
-            <form method="POST" action="/blog/newpost/save/">{% csrf_token %}
+            <form method="POST" action="/blog/post/save/">{% csrf_token %}
                   <input name="id"  value="{{ form.initial.id|default:'' }}" type="hidden" >
                   <fieldset>
                         <label>Title</label>
@@ -28,10 +28,8 @@
                         <input type="text" placeholder="Type something…" name="{{ form.text.name }}"  value="{{ form.text.value|default_if_none:'' }}">
                         <label>Image Link</label>
                         <input type="text" placeholder="Put a full URL here..." name="{{ form.img.name }}"  value="{{ form.img.value|default_if_none:'' }}">
-                        <label>Tags</label>
-                        <input type="text" placeholder="Nature Life Planet..." name="{{ form.tags.name }}"  value="{{ form.tags.value|default_if_none:'' }}">
                         <label class="checkbox">
-                              <input type="checkbox" name="{{ form.online.name }}"  value="{{ form.online.value|default_if_none:'' }}"><span class="metro-checkbox">Online?</span>
+                              <input type="checkbox" name="{{ form.online.name }}" {% if form.online.value %}checked{% endif %}><span class="metro-checkbox">Online?</span>
                         </label>
                         <label>Date: {{ form.date.value|default_if_none:'' }}</label>
                         <br />

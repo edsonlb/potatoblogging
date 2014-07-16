@@ -1,0 +1,26 @@
+{% extends 'template.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block main %}
+
+<div class="panorama-section">
+      <div class="tile-column-span-2">                    
+            <img src="{{ post.img }}" alt="{{ post.title }}"/><br /><br />
+            <a href="/blog/post/delete/{{ post.pk }}/" class="btn btn-danger">Delete Post</a>
+            <a href="/blog/post/edit/{{ post.pk }}/" class="btn btn-success">Edit Post</a>
+            
+      </div>
+</div>
+
+
+<div class="panorama-section">
+      <h1>{{ post.title }}</h1>
+      <h4>{{ post.date }}</h4>
+
+      <div class="tile-column-span-2">
+       <br/>
+            <div class="text2">{{ post.text }}</div>
+      </div> 
+</div>
+{% endblock main %}
