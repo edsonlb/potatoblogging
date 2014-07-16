@@ -7,46 +7,42 @@
 <div class="panorama-section">
    
       <h2>New Posts</h2>
-                        
       <div class="tile-column-span-2">
-            <a class="tile widepeek" href="#">
-                  <div class="tile wide image">
-                        <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Fuso_Trial_Heading_Left.jpg/640px-Fuso_Trial_Heading_Left.jpg" alt=""/>
-                  </div>
+      {% for post in new_posts %}                      
+            <a class="tile wide imagetext wideimage bg-color-green" href="/blog/">
+                  <img src="{{ post.img }}" alt="{{ post.title }}"/>
                   <div class="textover-wrapper transparent">
-                        <div class="text2">Famous Fantastic Mysteries</div>
+                        <div class="text2">{{ post.title }}</div>
                   </div>
             </a>
-
-   
-            <a class="tile wide imagetext wideimage bg-color-green" href="#">
-                  <img src="http://upload.wikimedia.org/wikipedia/en/e/e9/Famous_Fantastic_Mysteries_August_1942_cover.jpg" alt=""/>
-                  <div class="textover-wrapper transparent">
-                        <div class="text2">Famous Fantastic Mysteries</div>
-                  </div>
-            </a>
-   
+      {% endfor %}
       </div>
 </div>
+
 
 <div class="panorama-section">
 
       <h2>Old Posts</h2>
-   
+      {% for post in old_posts %}
+
+      {% if forloop.first %}
       <div class="tile-column-span-2">
+      {% elif forloop.counter0|divisibleby:6  %}
+      </div>
+      <div class="tile-column-span-2">
+      {% endif %}
    
             <a class="tile square image" href="#">
-                  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Hagia_Sophia_Mars_2013.jpg/640px-Hagia_Sophia_Mars_2013.jpg" alt=""/>
+                  <img src="{{ post.img }}" alt="{{ post.title }}"/>
                   <div class="textover-wrapper transparent">
-                        <div class="text2">Hagia Sophia</div>
+                        <div class="text2">{{ post.title }}</div>
                   </div>
             </a>
 
+      {% if forloop.last %}
       </div>
+      {% endif %} 
 
-
-
-
-   
-      </div>
-{%endblock main %}
+      {% endfor %}    
+</div>
+{% endblock main %}
