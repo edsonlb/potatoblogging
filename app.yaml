@@ -1,5 +1,5 @@
 application: potatoblogging
-version: 1
+version: 3.1
 runtime: python27
 api_version: 1
 threadsafe: no
@@ -7,6 +7,9 @@ threadsafe: no
 libraries:
 - name: django
   version: "1.5"
+
+- name: MySQLdb
+  version: "latest"
 
 builtins:
 - django_wsgi: on
