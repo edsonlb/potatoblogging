@@ -22,9 +22,9 @@ DATABASES = {
         'ENGINE': DB_ENGINE, 
         'NAME': DB_NAME,                     
         'USER': DB_USER,
-        #'PASSWORD': DB_PASSWORD,
+        'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,                      
-        #'PORT': DB_PORT,                     
+        'PORT': DB_PORT,                     
     }
 }
 
@@ -100,6 +100,10 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
 )
 
 MIDDLEWARE_CLASSES = (
