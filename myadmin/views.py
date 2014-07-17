@@ -21,17 +21,38 @@ def checklogin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
 
+        if form.is_valid():
+            user = authenticate(username=form.data['username'], password=form.data['password']) 
+            if user is not None:
+                if user.is_active:
+                    auth_login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    return render(request, 'login.html', {'form': form})
+            else:
+                return render(request, 'login.html', {'form': form})  
+        else:
+            return render(request, 'login.html', {'form': form})    
+    else:
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form}) 
+
+"""
+def checklogin(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+
         if form.is_valid(): 
             try:
-	            user = authenticate(username=form.data['username'], password=form.data['password'])
-	            if user is not None:
-	                if user.is_active:
-	                    auth_login(request, user)
-	                    return HttpResponseRedirect('/')
-	                else:
-	                    return render(request, 'login.html', {'form': form})
-	            else:
-	                return render(request, 'login.html', {'form': form})
+                user = authenticate(username=form.data['username'], password=form.data['password'])
+                if user is not None:
+                    if user.is_active:
+                        auth_login(request, user)
+                        return HttpResponseRedirect('/')
+                    else:
+                        return render(request, 'login.html', {'form': form})
+                else:
+                    return render(request, 'login.html', {'form': form})
             except: 
                 return render(request, 'login.html', {'form': form})   
         else:
@@ -39,3 +60,4 @@ def checklogin(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form}) 
+"""

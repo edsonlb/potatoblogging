@@ -22,9 +22,9 @@ DATABASES = {
         'ENGINE': DB_ENGINE, 
         'NAME': DB_NAME,                     
         'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
+        #'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,                      
-        'PORT': DB_PORT,                     
+        #'PORT': DB_PORT,                     
     }
 }
 
@@ -103,17 +103,22 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'potatoblogging.urls'
@@ -134,11 +139,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'myadmin',
     'blog',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
+
+LOGIN_URL = '/myadmin/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
