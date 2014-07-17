@@ -8,10 +8,10 @@ settings._target = None
 
 import django.core.handlers.wsgi
 import django.core.signals
-import django.db
-import django.dispatch.dispatcher
+#import django.db
+#import django.dispatch.dispatcher
 
-def log_exception(*args, **kwds):
+"""def log_exception(*args, **kwds):
 	logging.exception('Exception in request:')
 
 django.dispatch.Signal.connect(
@@ -20,6 +20,7 @@ django.dispatch.Signal.connect(
 django.dispatch.Signal.disconnect(
     django.core.signals.got_request_exception,
     django.db._rollback_on_exception)
+"""
 
 def main():
 	application = django.core.handlers.wsgi.WSGIHandler()

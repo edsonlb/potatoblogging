@@ -22,9 +22,9 @@ DATABASES = {
         'ENGINE': DB_ENGINE, 
         'NAME': DB_NAME,                     
         'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
+        #'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,                      
-        'PORT': DB_PORT,                     
+        #'PORT': DB_PORT,                     
     }
 }
 
