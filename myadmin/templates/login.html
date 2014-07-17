@@ -1,0 +1,35 @@
+{% extends 'template.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block main %}
+
+<div class="panorama-section">
+   
+      <h2>My Admin</h2>
+      <br />
+                        
+      <div class="tile-column-span-2">
+
+      {% if form.errors %}
+      <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Attention!</strong> <br />
+            {{ form.errors.as_text }}
+      </div>
+      {% endif %}
+
+      <form method="POST" action="/myadmin/checklogin/">{% csrf_token %}
+            <fieldset>
+                  <label>User</label>
+                  <input type="text" placeholder="User..." name="{{ form.username.name }}"  value="{{ form.username.value|default_if_none:'' }}">
+                  <label>Password</label>
+                  <input type="password" placeholder="Your password…" name="{{ form.password.name }}"  value="{{ form.password.value|default_if_none:'' }}">
+                  <br />
+                  <div align="center"><button type="submit" class="btn">Login</button></div>
+                  </fieldset>
+            </form>
+
+      </div>
+</div>
+{%endblock main %}

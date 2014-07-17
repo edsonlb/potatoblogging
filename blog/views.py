@@ -1,9 +1,10 @@
 #coding: utf-8
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from blog.forms import PostForm
 from blog.models import Post
-from django.db.models import Q
-import markdown
+
 
 def index(request):
     new_posts = Post.objects.filter(online=True).order_by('-date')[:3]
@@ -11,10 +12,12 @@ def index(request):
 
     return render(request, 'index.html', {'old_posts': old_posts, 'new_posts': new_posts})
 
+@login_required
 def post(request):
     form = PostForm()
     return render(request, 'postform.html', {'form': form, 'page_name': 'My new post'})
 
+@login_required
 def post_save(request):
     if request.method == 'POST':
         try:
@@ -42,6 +45,7 @@ def post_view(request, postName):
 
     return render(request, 'postview.html', {'post': post})
 
+@login_required
 def post_delete(request, id):
     try:
         post = Post.objects.get(pk=id)
@@ -51,6 +55,7 @@ def post_delete(request, id):
 
     return HttpResponseRedirect('/')
 
+@login_required
 def post_edit(request, id):
     try:
         post = Post.objects.get(pk=id)   
@@ -70,6 +75,7 @@ def post_search(request):
     else:
         return HttpResponseRedirect('/')
 
+@login_required
 def post_offline(request):
     new_posts = Post.objects.filter(online=False).order_by('-date')[:3]
     old_posts = Post.objects.filter(online=False).order_by('-date')[3:]   
