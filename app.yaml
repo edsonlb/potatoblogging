@@ -4,10 +4,17 @@ runtime: python27
 api_version: 1
 threadsafe: no
 
+libraries:
+- name: django
+  version: "1.5"
+
+builtins:
+- django_wsgi: on
+
 handlers:
 - url: /.*
   script: main.py
 
-libraries:
-- name: django
-  version: "1.5"
+- url: /static
+  static_dir: /blog/static
+  expiration: '0'

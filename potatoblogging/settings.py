@@ -3,8 +3,10 @@
 import os
 from settings_secret import *
 
-MEDIA_ROOT_VAR = os.path.dirname(os.path.realpath(__file__))+'/blog/templates'
-MEDIA_ROOT_VAR = MEDIA_ROOT_VAR.replace('/potatoblogging/blog/templates', '/templates')
+BASE_DIR = os.path.abspath(os.path.dirname(__file__)) + os.sep
+
+STATIC_ROOT_VAR = os.path.dirname(os.path.realpath(__file__))+'/blog'
+STATIC_ROOT_VAR = STATIC_ROOT_VAR.replace('/potatoblogging/blog', '/')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -17,13 +19,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sqlite3.sqlite',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': DB_ENGINE, 
+        'NAME': DB_NAME,                     
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,                      
+        'PORT': DB_PORT,                     
     }
 }
 
@@ -56,7 +57,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = MEDIA_ROOT_VAR
+MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -67,7 +68,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = STATIC_ROOT_VAR+'/static'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -117,7 +118,7 @@ ROOT_URLCONF = 'potatoblogging.urls'
 WSGI_APPLICATION = 'potatoblogging.wsgi.application'
 
 TEMPLATE_DIRS = (
-    MEDIA_ROOT_VAR,
+    STATIC_ROOT_VAR+'/templates/',
 )
 
 INSTALLED_APPS = (

@@ -1,13 +1,8 @@
-# main.py
-
-import os, sys
+import os, sys, logging
 os.environ["DJANGO_SETTINGS_MODULE"] = "potatoblogging.settings"
 sys.path.append("/home/edson/Projetos/projetoPotatoBlog")
 
-# Google App Engine imports.
 from google.appengine.ext.webapp import util
-
-# Force Django to reload its settings.
 from django.conf import settings
 settings._target = None
 
@@ -16,20 +11,18 @@ import django.core.signals
 import django.db
 import django.dispatch.dispatcher
 
-# Log errors.
-#django.dispatch.dispatcher.connect(
-#   log_exception, django.core.signals.got_request_exception)
+def log_exception(*args, **kwds):
+	logging.exception('Exception in request:')
 
-# Unregister the rollback event handler.
-django.dispatch.dispatcher.disconnect(
-django.db._rollback_on_exception,
-django.core.signals.got_request_exception)
+django.dispatch.Signal.connect(
+   django.core.signals.got_request_exception, log_exception)
+
+django.dispatch.Signal.disconnect(
+    django.core.signals.got_request_exception,
+    django.db._rollback_on_exception)
 
 def main():
-	# Create a Django application for WSGI.
 	application = django.core.handlers.wsgi.WSGIHandler()
-
-	# Run the WSGI CGI handler with that application.
 	util.run_wsgi_app(application)
 
 if __name__ == "__main__":
